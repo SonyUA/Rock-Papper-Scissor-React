@@ -1,0 +1,88 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  text-decoration: none;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+
+  margin: 20px auto;
+  max-width: 1220px;
+}
+
+.rival__section,
+.user__section {
+  margin: 0px auto;
+  position: relative;
+  overflow: hidden;
+  min-width: 270px;
+  min-height: 270px;
+}
+
+.user__img {
+  transform: rotate(300deg) translateY(65px);
+  width: 80%;
+  position: absolute;
+}
+
+.rival__img {
+  width: 80%;
+  transform: rotate(120deg);
+  position: absolute;
+}
+
+.section__score {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.user__score,
+.rival__score {
+  font-size: 30px;
+  letter-spacing: 2px;
+}
+
+.winner__title {
+  font-size: 35px;
+  color: red;
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+
+.management__section {
+  width: 50%;
+  margin: 20px auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.management__btn {
+  width: 75px;
+  padding: 2px 5px 2px 5px;
+  border-radius: 5px;
+  background: rgba(61, 64, 62, 0.569);
+  color: aliceblue;
+  cursor: pointer;
+  text-align: center;
+}
+
+.management__img {
+  width: 100%;
+  transition: transform 500ms ease-in-out;
+}
+
+.management__img:hover {
+  transform: translateY(-5px);
+
+}
+
+.management__btn:hover {
+  color: black;
+  background: transparent;
+}
