@@ -27,12 +27,15 @@
   transform: rotate(300deg) translateY(65px);
   width: 80%;
   position: absolute;
+  transition: 500ms ease-in-out;
 }
 
 .rival__img {
   width: 80%;
   transform: rotate(120deg);
   position: absolute;
+  transition: 500ms ease-in-out;
+
 }
 
 .section__score {
@@ -43,7 +46,7 @@
 
 .user__score,
 .rival__score {
-  font-size: 30px;
+  font-size: 25px;
   letter-spacing: 2px;
 }
 

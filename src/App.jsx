@@ -11,59 +11,55 @@ function App() {
     const userHandRef = useRef(null);
     const pcHandRef = useRef(null);
     const images = [rockImg, paperImg, scissorsImg];
-    const goStart = (e) => {
+    const goStart = async (e) => {
         const userId = +e.target.id;
-        const opponentId = Math.floor(Math.random() * 3);
+        const opponentId = Math.floor(Math.random() * 3 + 1);
 
-        if (userId === opponentId) {
-            console.log("draw");
+        // eslint-disable-next-line no-unused-vars
+        const startGame = setTimeout(() => {
             pcHandRef.current.src = images[opponentId - 1];
             userHandRef.current.src = images[userId - 1];
-            setWhoWon("Draw");
-        }
+            pcHandRef.current.style = "top: 0px";
+            userHandRef.current.style = "bottom: 0px";
+            if (userId === opponentId) {
+                console.log("draw");
+                setWhoWon("Draw");
+            }
 
-        if (userId === 1 && opponentId === 2) {
-            console.log("pc win");
-            setWhoWon("PC Win");
-            setPcPoint((prev) => prev + 1);
-            pcHandRef.current.src = images[opponentId - 1];
-            userHandRef.current.src = images[userId - 1];
-        }
-        if (userId === 2 && opponentId === 1) {
-            console.log("you win");
-            setWhoWon("You Win");
-            setUserPoint((prev) => prev + 1);
-            pcHandRef.current.src = images[opponentId - 1];
-            userHandRef.current.src = images[userId - 1];
-        }
-        if (userId === 1 && opponentId === 3) {
-            console.log("you win");
-            setWhoWon("You Win");
-            setUserPoint((prev) => prev + 1);
-            pcHandRef.current.src = images[opponentId - 1];
-            userHandRef.current.src = images[userId - 1];
-        }
-        if (userId === 3 && opponentId === 1) {
-            console.log("pc win");
-            setWhoWon("PC Win");
-            setPcPoint((prev) => prev + 1);
-            pcHandRef.current.src = images[opponentId - 1];
-            userHandRef.current.src = images[userId - 1];
-        }
-        if (userId === 2 && opponentId === 3) {
-            console.log("pc win");
-            setWhoWon("PC Win");
-            setPcPoint((prev) => prev + 1);
-            pcHandRef.current.src = images[opponentId - 1];
-            userHandRef.current.src = images[userId - 1];
-        }
-        if (userId === 3 && opponentId === 2) {
-            console.log("you win");
-            setWhoWon("You Win");
-            setUserPoint((prev) => prev + 1);
-            pcHandRef.current.src = images[opponentId - 1];
-            userHandRef.current.src = images[userId - 1];
-        }
+            if (userId === 1 && opponentId === 2) {
+                console.log("pc win");
+                setWhoWon("PC Win");
+                setPcPoint((prev) => prev + 1);
+            }
+            if (userId === 2 && opponentId === 1) {
+                console.log("you win");
+                setWhoWon("You Win");
+                setUserPoint((prev) => prev + 1);
+            }
+            if (userId === 1 && opponentId === 3) {
+                console.log("you win");
+                setWhoWon("You Win");
+                setUserPoint((prev) => prev + 1);
+            }
+            if (userId === 3 && opponentId === 1) {
+                console.log("pc win");
+                setWhoWon("PC Win");
+                setPcPoint((prev) => prev + 1);
+            }
+            if (userId === 2 && opponentId === 3) {
+                console.log("pc win");
+                setWhoWon("PC Win");
+                setPcPoint((prev) => prev + 1);
+            }
+            if (userId === 3 && opponentId === 2) {
+                console.log("you win");
+                setWhoWon("You Win");
+                setUserPoint((prev) => prev + 1);
+            }
+        }, 1000);
+
+        pcHandRef.current.style = "top: -233px";
+        userHandRef.current.style = "bottom: -220px";
     };
     return (
         <div className='wrapper'>
