@@ -1,8 +1,12 @@
 import "./App.css";
-import rockImg from "../public/rock.png";
-import paperImg from "../public/paper.png";
-import scissorsImg from "../public/scissors.png";
+import rockImg from "./images/rock.png";
+import paperImg from "./images/paper.png";
+import scissorsImg from "./images/scissors.png";
 import { useRef, useState } from "react";
+import RivalSection from "./Components/RivalSection";
+import ScoreSection from "./Components/ScoreSection";
+import UserSection from "./Components/UserSection";
+import ManagmentSection from "./Components/ManagmentSection";
 
 function App() {
     const [userPoint, setUserPoint] = useState(0);
@@ -11,83 +15,50 @@ function App() {
     const userHandRef = useRef(null);
     const pcHandRef = useRef(null);
     const images = [rockImg, paperImg, scissorsImg];
-    const goStart = async (e) => {
+    const results = {
+        "1-2": "PC Win",
+        "2-1": "You Win",
+        "1-3": "You Win",
+        "3-1": "PC Win",
+        "2-3": "PC Win",
+        "3-2": "You Win",
+    };
+    const goStart = (e) => {
         const userId = +e.target.id;
         const opponentId = Math.floor(Math.random() * 3 + 1);
+        const res = results[`${userId}-${opponentId}`];
 
         // eslint-disable-next-line no-unused-vars
         const startGame = setTimeout(() => {
             pcHandRef.current.src = images[opponentId - 1];
             userHandRef.current.src = images[userId - 1];
+
             pcHandRef.current.style = "top: 0px";
             userHandRef.current.style = "bottom: 0px";
+
             if (userId === opponentId) {
-                console.log("draw");
                 setWhoWon("Draw");
             }
+            if (res === "PC Win") {
+                setWhoWon("PC Win");
+                setPcPoint((prev) => prev + 1);
+            } else if (res === "You Win") {
+                setWhoWon("You Win");
+                setUserPoint((prev) => prev + 1);
+            }
+        }, 600);
 
-            if (userId === 1 && opponentId === 2) {
-                console.log("pc win");
-                setWhoWon("PC Win");
-                setPcPoint((prev) => prev + 1);
-            }
-            if (userId === 2 && opponentId === 1) {
-                console.log("you win");
-                setWhoWon("You Win");
-                setUserPoint((prev) => prev + 1);
-            }
-            if (userId === 1 && opponentId === 3) {
-                console.log("you win");
-                setWhoWon("You Win");
-                setUserPoint((prev) => prev + 1);
-            }
-            if (userId === 3 && opponentId === 1) {
-                console.log("pc win");
-                setWhoWon("PC Win");
-                setPcPoint((prev) => prev + 1);
-            }
-            if (userId === 2 && opponentId === 3) {
-                console.log("pc win");
-                setWhoWon("PC Win");
-                setPcPoint((prev) => prev + 1);
-            }
-            if (userId === 3 && opponentId === 2) {
-                console.log("you win");
-                setWhoWon("You Win");
-                setUserPoint((prev) => prev + 1);
-            }
-        }, 1000);
-
-        pcHandRef.current.style = "top: -233px";
-        userHandRef.current.style = "bottom: -220px";
+        pcHandRef.current.style = "top: -250px";
+        userHandRef.current.style = "bottom: -250px";
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+
     return (
         <div className='wrapper'>
-            <div className='rival__section'>
-                <img ref={pcHandRef} className='rival__img' src={rockImg} alt='' />
-            </div>
-            <div className='section__score'>
-                <p className='user__score'>User {userPoint}</p>
-                <p className='winner__title'>{whoWon}</p>
-                <p className='rival__score'>Opponent {pcPoint}</p>
-            </div>
-            <div className='user__section'>
-                <img ref={userHandRef} className='user__img' src={paperImg} alt='' />
-            </div>
-            <div className='management__section'>
-                <div className='management__btn'>
-                    <img onClick={goStart} id='1' className='management__img' src={rockImg} alt='rock-image' />
-                    <p className='management__title'>Rock</p>
-                </div>
-                <div className='management__btn'>
-                    <img onClick={goStart} id='2' className='management__img' src={paperImg} alt='paper-image' />
-                    <p className='management__title'>Paper</p>
-                </div>
-                <div className='management__btn'>
-                    <img onClick={goStart} id='3' className='management__img' src={scissorsImg} alt='scissors-image' />
-                    <p className='management__title'>Scissors</p>
-                </div>
-            </div>
+            <RivalSection pcHandRef={pcHandRef} rockImg={rockImg} />
+            <ScoreSection userPoint={userPoint} pcPoint={pcPoint} whoWon={whoWon} />
+            <UserSection userHandRef={userHandRef} paperImg={paperImg} />
+            <ManagmentSection images={images} goStart={goStart} />
         </div>
     );
 }

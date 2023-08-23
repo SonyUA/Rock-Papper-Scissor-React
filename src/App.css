@@ -11,7 +11,10 @@
   flex-direction: column;
 
   margin: 20px auto;
-  max-width: 1220px;
+  max-width: 600px;
+  background: url('./images/pexels-oleksandr-p-12932247.jpg') no-repeat;
+  background-size: cover;
+  background-position: left;
 }
 
 .rival__section,
@@ -44,32 +47,49 @@
   align-items: center;
 }
 
+
+
 .user__score,
 .rival__score {
   font-size: 25px;
   letter-spacing: 2px;
+  text-align: center;
+  flex: 1 0 33%;
+  background: #ffffff9e;
+  color: black;
+}
+
+.user__score {
+  border-radius: 0px 10px 10px 0px;
+}
+
+.rival__score {
+  border-radius: 10px 0px 0px 10px;
 }
 
 .winner__title {
   font-size: 35px;
-  color: red;
+  color: white;
   font-weight: 600;
   letter-spacing: 2px;
+  text-align: center;
+  flex: 1 0 33%;
 }
 
 .management__section {
-  width: 50%;
+
   margin: 20px auto;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+  gap: 20px;
 }
 
 .management__btn {
   width: 75px;
   padding: 2px 5px 2px 5px;
   border-radius: 5px;
-  background: rgba(61, 64, 62, 0.569);
+  background: rgb(255 255 255 / 57%);
   color: aliceblue;
   cursor: pointer;
   text-align: center;
@@ -86,6 +106,6 @@
 }
 
 .management__btn:hover {
-  color: black;
+
   background: transparent;
 }
